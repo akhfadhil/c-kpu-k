@@ -1,113 +1,114 @@
-
-
 <x-layout>
-   
    <!-- <x-slot:title>{{ $title }}</x-slot:title> -->
+   <!-- Bagian Pencarian -->
+   <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+         <!-- Bagian Pencarian -->
+         <section id="search-section" 
+            class="bg-white shadow-lg rounded-2xl p-6 col-span-2 transform transition duration-500 hover:scale-[1.02] hover:shadow-xl">
+            <h2 class="text-xl font-semibold mb-4">Pencarian Berdasarkan Wilayah</h2>
+            <form action="/hasil" method="get" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <!-- Provinsi -->
+               <div>
+                  <label for="provinsi" class="block text-sm font-medium mb-1">Provinsi</label>
+                  <input type="text" id="provinsi" name="provinsi" value="Jawa Timur"
+                     readonly
+                     class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
+               </div>
+               <!-- Kabupaten -->
+               <div>
+                  <label for="kabupaten" class="block text-sm font-medium mb-1">Kabupaten</label>
+                  <input type="text" id="kabupaten" name="kabupaten" value="Banyuwangi"
+                     readonly
+                     class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
+               </div>
+               <!-- Kecamatan -->
+               <div>
+                  <label for="kecamatan" class="block text-sm font-medium mb-1">Kecamatan</label>
+                  <select id="kecamatan" name="kecamatan" required
+                     class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+                     <option value="">-- Pilih Kecamatan --</option>
+                     @foreach($kecamatan as $kcmtn)
+                     <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama'] }}</option>
+                     @endforeach
+                  </select>
+               </div>
+               <!-- Desa -->
+               <div>
+                  <label for="desa" class="block text-sm font-medium mb-1">Desa</label>
+                  <select id="desa" name="desa" required
+                     class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+                     <option value="">-- Pilih Desa --</option>
+                  </select>
+               </div>
+               <!-- Tombol Cari -->
+               <div class="md:col-span-2 flex justify-end mt-4">
+                  <button type="button" id="btnCari"
+                     class="bg-blue-600 hover:bg-blue-700 active:scale-95 transform transition duration-200 text-white font-semibold px-6 py-2 rounded-xl shadow">
+                  Cari
+                  </button>
+               </div>
+            </form>
+         </section>
+         <!-- Bagian Informasi Singkat -->
+         <section id="info-section" 
+            class="bg-white shadow-lg rounded-2xl p-6 transform transition duration-500 hover:scale-[1.02] hover:shadow-xl">
+            <h2 class="text-xl font-semibold mb-4">Informasi Singkat</h2>
+            <ul class="space-y-2">
+               <li class="flex justify-between border-b pb-2">
+                  <span>Total TPS</span>
+                  <strong>12.345</strong>
+               </li>
+               <li class="flex justify-between border-b pb-2">
+                  <span>Jumlah Dokumen</span>
+                  <strong>8.765</strong>
+               </li>
+               <li class="flex justify-between">
+                  <span>Pengumuman</span>
+                  <strong class="text-blue-600">Pengumpulan dokumen C1 berakhir 20 Agustus</strong>
+               </li>
+            </ul>
+         </section>
+      </div>
+   </section>
 
-     <!-- Bagian Pencarian -->
-  <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+   <script>
+      // Lempar array desa dari PHP ke JS
+      const desaData = @json($desa);
       
-      <!-- Bagian Pencarian -->
-      <section id="search-section" 
-               class="bg-white shadow-lg rounded-2xl p-6 col-span-2 transform transition duration-500 hover:scale-[1.02] hover:shadow-xl">
-        <h2 class="text-xl font-semibold mb-4">Pencarian Berdasarkan Wilayah</h2>
-        <form action="/hasil" method="get" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <!-- Provinsi -->
-          <div>
-            <label for="provinsi" class="block text-sm font-medium mb-1">Provinsi</label>
-            <input type="text" id="provinsi" name="provinsi" value="Jawa Timur"
-                  readonly
-                  class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
-          </div>
+      const kecamatanSelect = document.getElementById('kecamatan');
+      const desaSelect = document.getElementById('desa');
+      
+      kecamatanSelect.addEventListener('change', function() {
+        const selectedKecamatan = this.value;
+      
+        // Kosongkan dulu desa
+        desaSelect.innerHTML = '<option value="">-- Pilih Desa --</option>';
+      
+        // Filter desa berdasarkan id_kecamatan
+        const filteredDesa = desaData.filter(d => d.id_kecamatan === selectedKecamatan);
+      
+        // Tambahkan ke dropdown
+        filteredDesa.forEach(d => {
+          const option = document.createElement('option');
+          option.value = d.id_desa; // atau pakai nama kalau perlu
+          option.textContent = d.nama_desa;
+          desaSelect.appendChild(option);
+        });
+      });
+   </script>
 
-          <!-- Kabupaten -->
-          <div>
-            <label for="kabupaten" class="block text-sm font-medium mb-1">Kabupaten</label>
-            <input type="text" id="kabupaten" name="kabupaten" value="Banyuwangi"
-                  readonly
-                  class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
-          </div>
-
-          <!-- Kecamatan -->
-          <div>
-            <label for="kecamatan" class="block text-sm font-medium mb-1">Kecamatan</label>
-            <select id="kecamatan" name="kecamatan" required
-                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
-              <option value="">-- Pilih Kecamatan --</option>
-              @foreach($kecamatan as $kcmtn)
-                <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama'] }}</option>
-              @endforeach
-            </select>
-          </div>
-
-          <!-- Desa -->
-          <div>
-            <label for="desa" class="block text-sm font-medium mb-1">Desa</label>
-            <select id="desa" name="desa" required
-                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
-              <option value="">-- Pilih Desa --</option>
-            </select>
-          </div>
-
-          <!-- Tombol Cari -->
-          <div class="md:col-span-2 flex justify-end mt-4">
-            <button type="submit" 
-                    class="bg-blue-600 hover:bg-blue-700 active:scale-95 transform transition duration-200 text-white font-semibold px-6 py-2 rounded-xl shadow">
-              Cari
-            </button>
-          </div>
-        </form>
-      </section>
-
-      <!-- Bagian Informasi Singkat -->
-      <section id="info-section" 
-               class="bg-white shadow-lg rounded-2xl p-6 transform transition duration-500 hover:scale-[1.02] hover:shadow-xl">
-        <h2 class="text-xl font-semibold mb-4">Informasi Singkat</h2>
-        <ul class="space-y-2">
-          <li class="flex justify-between border-b pb-2">
-            <span>Total TPS</span>
-            <strong>12.345</strong>
-          </li>
-          <li class="flex justify-between border-b pb-2">
-            <span>Jumlah Dokumen</span>
-            <strong>8.765</strong>
-          </li>
-          <li class="flex justify-between">
-            <span>Pengumuman</span>
-            <strong class="text-blue-600">Pengumpulan dokumen C1 berakhir 20 Agustus</strong>
-          </li>
-        </ul>
-      </section>
-
-    </div>
-  </section>
-
-<script>
-  // Lempar array desa dari PHP ke JS
-  const desaData = @json($desa);
-
-  const kecamatanSelect = document.getElementById('kecamatan');
-  const desaSelect = document.getElementById('desa');
-
-  kecamatanSelect.addEventListener('change', function() {
-    const selectedKecamatan = this.value;
-
-    // Kosongkan dulu desa
-    desaSelect.innerHTML = '<option value="">-- Pilih Desa --</option>';
-
-    // Filter desa berdasarkan id_kecamatan
-    const filteredDesa = desaData.filter(d => d.id_kecamatan === selectedKecamatan);
-
-    // Tambahkan ke dropdown
-    filteredDesa.forEach(d => {
-      const option = document.createElement('option');
-      option.value = d.id_desa; // atau pakai nama kalau perlu
-      option.textContent = d.nama_desa;
-      desaSelect.appendChild(option);
-    });
-  });
-</script>
-
+   <!-- Script untuk redirect -->
+   <script>
+      document.getElementById('btnCari').addEventListener('click', function () {
+        const desaId = document.getElementById('desa').value;
+        if (desaId) {
+          window.location.href = `/desa/${desaId}`; 
+          // <-- arahkan ke route yang sesuai di Laravel
+        } else {
+          alert("Silakan pilih desa terlebih dahulu");
+        }
+      });
+   </script>
+   
 </x-layout>
