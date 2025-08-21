@@ -1,6 +1,4 @@
-<div>
-    <!-- It always seems impossible until it is done. - Nelson Mandela -->
-</div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100 dark:bg-gray-500">
    <head>
       <meta charset="UTF-8">

@@ -2,7 +2,7 @@
 
 <x-layout>
 
-   <x-slot:title>{{ $title }}</x-slot:title>
+   <!-- <x-slot:title>{{ $title }}</x-slot:title> -->
   <!-- Konten Utama -->
   <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
     

@@ -2,7 +2,7 @@
 
 <x-layout>
    
-   <x-slot:title>{{ $title }}</x-slot:title>
+   <!-- <x-slot:title>{{ $title }}</x-slot:title> -->
 
      <!-- Bagian Pencarian -->
   <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
@@ -16,35 +16,37 @@
           
           <!-- Provinsi -->
           <div>
-            <label for="provinsi" class="block text-sm font-medium mb-1">Provinsi (opsional)</label>
-            <select id="provinsi" name="provinsi" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
-              <option value="">-- Pilih Provinsi --</option>
-              <option value="jawa-tengah">Jawa Tengah</option>
-              <option value="jawa-barat">Jawa Barat</option>
-              <option value="jawa-timur">Jawa Timur</option>
-            </select>
+            <label for="provinsi" class="block text-sm font-medium mb-1">Provinsi</label>
+            <input type="text" id="provinsi" name="provinsi" value="Jawa Timur"
+                  readonly
+                  class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
           </div>
 
           <!-- Kabupaten -->
           <div>
             <label for="kabupaten" class="block text-sm font-medium mb-1">Kabupaten</label>
-            <select id="kabupaten" name="kabupaten" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
-              <option value="">-- Pilih Kabupaten --</option>
-            </select>
+            <input type="text" id="kabupaten" name="kabupaten" value="Banyuwangi"
+                  readonly
+                  class="w-full border rounded-lg p-2 bg-gray-100 text-gray-700 cursor-not-allowed">
           </div>
 
           <!-- Kecamatan -->
           <div>
             <label for="kecamatan" class="block text-sm font-medium mb-1">Kecamatan</label>
-            <select id="kecamatan" name="kecamatan" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+            <select id="kecamatan" name="kecamatan" required
+                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
               <option value="">-- Pilih Kecamatan --</option>
+              @foreach($kecamatan as $kcmtn)
+                <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama'] }}</option>
+              @endforeach
             </select>
           </div>
 
           <!-- Desa -->
           <div>
             <label for="desa" class="block text-sm font-medium mb-1">Desa</label>
-            <select id="desa" name="desa" required class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+            <select id="desa" name="desa" required
+                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
               <option value="">-- Pilih Desa --</option>
             </select>
           </div>
@@ -81,5 +83,31 @@
 
     </div>
   </section>
+
+<script>
+  // Lempar array desa dari PHP ke JS
+  const desaData = @json($desa);
+
+  const kecamatanSelect = document.getElementById('kecamatan');
+  const desaSelect = document.getElementById('desa');
+
+  kecamatanSelect.addEventListener('change', function() {
+    const selectedKecamatan = this.value;
+
+    // Kosongkan dulu desa
+    desaSelect.innerHTML = '<option value="">-- Pilih Desa --</option>';
+
+    // Filter desa berdasarkan id_kecamatan
+    const filteredDesa = desaData.filter(d => d.id_kecamatan === selectedKecamatan);
+
+    // Tambahkan ke dropdown
+    filteredDesa.forEach(d => {
+      const option = document.createElement('option');
+      option.value = d.id_desa; // atau pakai nama kalau perlu
+      option.textContent = d.nama_desa;
+      desaSelect.appendChild(option);
+    });
+  });
+</script>
 
 </x-layout>

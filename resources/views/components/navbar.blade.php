@@ -10,10 +10,6 @@
                            <!-- Current: "bg-gray-900 dark:bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
                            <x-nav-link href="/" :active="request()->is('/')">Dashboard</x-nav-link>
                            <x-nav-link href="/upload" :active="request()->is('upload')">Upload</x-nav-link>
-                           <!-- <a href="/upload" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Upload</a> -->
-                           <!-- <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Projects</a>
-                           <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Calendar</a>
-                           <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Reports</a> -->
                         </div>
                      </div>
                   </div>
@@ -50,13 +46,8 @@
             <el-disclosure id="mobile-menu" hidden class="block md:hidden">
                <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                   <!-- Current: "bg-gray-900 dark:bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-                  <!-- <x-nav-link href="/" :active="request()->is('/')">Dashboard</x-nav-link>
-                  <x-nav-link href="/upload" :active="request()->is('upload')">Upload</x-nav-link> -->
-                  <a href="#" aria-current="page" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white dark:bg-gray-950/50">Dashboard</a>
-                  <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Upload</a>
-                  <!-- <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Projects</a>
-                  <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Calendar</a>
-                  <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Reports</a> -->
+                  <x-nav-link-mobile href="/" :active="request()->is('/')">Dashboard</x-nav-link-mobile>
+                  <x-nav-link-mobile href="/upload" :active="request()->is('upload')">Upload</x-nav-link-mobile>
                </div>
                <div class="border-t border-white/10 pt-4 pb-3">
                   <div class="flex items-center px-5">
