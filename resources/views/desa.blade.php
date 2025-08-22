@@ -1,5 +1,8 @@
 <x-layout>
-   <x-slot:title>{{ $nama_desa }}</x-slot:title>
+
+   <!-- Title header -->
+   <!-- <x-slot:title>{{ $nama_desa }}</x-slot:title> -->
+
    <!-- Konten Utama -->
    <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
       <!-- Breadcrumb -->
@@ -9,14 +12,14 @@
             <li class="mx-2">></li>
             <li><a href="#" class="hover:text-blue-600">Banyuwangi</a></li>
             <li class="mx-2">></li>
-            <li><a href="#" class="hover:text-blue-600">Kecamatan Ungaran</a></li>
+            <li><a href="#" class="hover:text-blue-600">Kecamatan {{ $nama_kecamatan }}</a></li>
             <li class="mx-2">></li>
-            <li class="text-gray-800 font-semibold">Desa Sidomulyo</li>
+            <li class="text-gray-800 font-semibold">Desa {{ $nama_desa }}</li>
          </ol>
       </nav>
       <!-- Daftar TPS -->
       <div class="bg-white shadow-lg rounded-2xl p-6">
-         <h2 class="text-xl font-semibold mb-4">Daftar TPS di Desa {{ $daftar_tps[0]['id_desa'] }}</h2>
+         <h2 class="text-xl font-semibold mb-4">Daftar TPS di Desa {{ $nama_desa }}</h2>
          <ul class="space-y-4">
             <!-- TPS 1 -->
             @foreach ($daftar_tps as $tps)
@@ -34,4 +37,5 @@
          </ul>
       </div>
    </section>
+   
 </x-layout>

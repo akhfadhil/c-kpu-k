@@ -1,5 +1,8 @@
 <x-layout>
+   
+   <!-- Title header -->
    <!-- <x-slot:title>{{ $title }}</x-slot:title> -->
+
    <!-- Bagian Pencarian -->
    <section class="container mx-auto p-6" x-show="show" x-transition.duration.700ms>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -72,6 +75,7 @@
       </div>
    </section>
 
+   <!-- Script dropdown desa -->
    <script>
       // Lempar array desa dari PHP ke JS
       const desaData = @json($desa);
