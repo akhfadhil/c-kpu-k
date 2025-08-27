@@ -32,7 +32,7 @@
                      class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
                      <option value="">-- Pilih Kecamatan --</option>
                      @foreach($kecamatan as $kcmtn)
-                     <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama'] }}</option>
+                     <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama_kecamatan'] }}</option>
                      @endforeach
                   </select>
                </div>
