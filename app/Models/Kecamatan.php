@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Support\Arr;
 
-class Kecamatan {
+class Kecamatan extends Model {
 
     public static function all() {
         return [
