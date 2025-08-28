@@ -29,10 +29,10 @@
                <div>
                   <label for="kecamatan" class="block text-sm font-medium mb-1">Kecamatan</label>
                   <select id="kecamatan" name="kecamatan" required
-                     class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
                      <option value="">-- Pilih Kecamatan --</option>
                      @foreach($kecamatan as $kcmtn)
-                     <option value="{{ $kcmtn['id_kecamatan'] }}">{{ $kcmtn['nama_kecamatan'] }}</option>
+                     <option value="{{ $kcmtn['id'] }}">{{ $kcmtn['nama_kecamatan'] }}</option>
                      @endforeach
                   </select>
                </div>
@@ -40,7 +40,7 @@
                <div>
                   <label for="desa" class="block text-sm font-medium mb-1">Desa</label>
                   <select id="desa" name="desa" required
-                     class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
                      <option value="">-- Pilih Desa --</option>
                   </select>
                </div>
@@ -77,41 +77,47 @@
 
    <!-- Script dropdown desa -->
    <script>
-      // Lempar array desa dari PHP ke JS
-      const desaData = @json($desa);
-      
-      const kecamatanSelect = document.getElementById('kecamatan');
-      const desaSelect = document.getElementById('desa');
-      
-      kecamatanSelect.addEventListener('change', function() {
-        const selectedKecamatan = this.value;
-      
-        // Kosongkan dulu desa
-        desaSelect.innerHTML = '<option value="">-- Pilih Desa --</option>';
-      
-        // Filter desa berdasarkan id_kecamatan
-        const filteredDesa = desaData.filter(d => d.id_kecamatan === selectedKecamatan);
-      
-        // Tambahkan ke dropdown
-        filteredDesa.forEach(d => {
-          const option = document.createElement('option');
-          option.value = d.id_desa; // atau pakai nama kalau perlu
-          option.textContent = d.nama_desa;
-          desaSelect.appendChild(option);
-        });
+      document.getElementById('kecamatan').addEventListener('change', function() {
+         const kecamatanId = this.value;
+         const desaDropdown = document.getElementById('desa');
+
+         // Reset dropdown desa
+         desaDropdown.innerHTML = '<option value="">-- Pilih Desa --</option>';
+
+         if (kecamatanId) {
+               fetch(`/get-desa-by-kecamatan/${kecamatanId}`)
+                  .then(response => {
+                     if (!response.ok) {
+                           throw new Error('Network response was not ok');
+                     }
+                     return response.json();
+                  })
+                  .then(data => {
+                     data.forEach(desa => {
+                           const option = document.createElement('option');
+                           option.value = desa.id_desa; // Assuming your desa table has id_desa
+                           option.textContent = desa.nama_desa; // Assuming your desa table has nama_desa
+                           desaDropdown.appendChild(option);
+                     });
+                  })
+                  .catch(error => console.error('Error fetching villages:', error));
+         }
       });
    </script>
 
    <!-- Script untuk redirect -->
    <script>
-      document.getElementById('btnCari').addEventListener('click', function () {
-        const desaId = document.getElementById('desa').value;
-        if (desaId) {
-          window.location.href = `/desa/${desaId}`; 
-          // <-- arahkan ke route yang sesuai di Laravel
-        } else {
-          alert("Silakan pilih desa terlebih dahulu");
-        }
+      document.getElementById('btnCari').addEventListener('click', function() {
+         const desaId = document.getElementById('desa').value;
+
+         // Check if a village is selected
+         if (desaId) {
+               // Redirect to the Laravel route
+               window.location.href = `/desa/${desaId}`; 
+         } else {
+               // Alert the user if no village is selected
+               alert("Silakan pilih desa terlebih dahulu");
+         }
       });
    </script>
    

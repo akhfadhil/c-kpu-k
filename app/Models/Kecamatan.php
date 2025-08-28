@@ -2,56 +2,48 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
-class Kecamatan extends Model {
+class Kecamatan extends Model
+{
+    use HasFactory;
 
-    protected $table = 'kecamatan';
-    protected $primaryKey = 'id_kecamatan';
-
-    // public static function all() {
-    //     return [
-            // ["id_kecamatan" => "1", "nama" => "Bangorejo"],
-            // ["id_kecamatan" => "2", "nama" => "Banyuwangi"],
-            // ["id_kecamatan" => "3", "nama" => "Blimbingsari"],
-            // ["id_kecamatan" => "4", "nama" => "Cluring"],
-            // ["id_kecamatan" => "5", "nama" => "Gambiran"],
-            // ["id_kecamatan" => "6", "nama" => "Genteng"],
-            // ["id_kecamatan" => "7", "nama" => "Giri"],
-            // ["id_kecamatan" => "8", "nama" => "Glagah"],
-            // ["id_kecamatan" => "9", "nama" => "Glenmore"],
-            // ["id_kecamatan" => "10", "nama" => "Kabat"],
-            // ["id_kecamatan" => "11", "nama" => "Kalibaru"],
-            // ["id_kecamatan" => "12", "nama" => "Kalipuro"],
-            // ["id_kecamatan" => "13", "nama" => "Licin"],
-            // ["id_kecamatan" => "14", "nama" => "Muncar"],
-            // ["id_kecamatan" => "15", "nama" => "Pesanggaran"],
-            // ["id_kecamatan" => "16", "nama" => "Purwoharjo"],
-            // ["id_kecamatan" => "17", "nama" => "Rogojampi"],
-            // ["id_kecamatan" => "18", "nama" => "Sempu"],
-            // ["id_kecamatan" => "19", "nama" => "Siliragung"],
-            // ["id_kecamatan" => "20", "nama" => "Singojuruh"],
-            // ["id_kecamatan" => "21", "nama" => "Songgon"],
-            // ["id_kecamatan" => "22", "nama" => "Srono"],
-            // ["id_kecamatan" => "23", "nama" => "Tegaldlimo"],
-            // ["id_kecamatan" => "24", "nama" => "Tegalsari"],
-            // ["id_kecamatan" => "25", "nama" => "Wongsorejo"]
-    //     ];
-    // }
-
-    // public static function find($id) {
-
-    //     $kecamatan = Arr::first(static::all(), function ($item) use ($id) {
-    //         return $item ["id_kecamatan"] == $id;
-    //     });
-
-    //     if(!$kecamatan) {
-    //         abort(404, "Kecamatan tidak ditemukan.");
-    //     }
-
-    //     return $kecamatan ? $kecamatan : null;
-
-    // }
-
+    protected $fillable = ['nama_kecamatan'];
 }
+
+    // protected $table = 'kecamatan';
+    // protected $primaryKey = 'id_kecamatan';
+
+
+    // use Illuminate\Support\Facades\DB;
+
+// $kecamatans = [
+//     ['nama_kecamatan' => 'Bangorejo'],
+//     ['nama_kecamatan' => 'Banyuwangi'],
+//     ['nama_kecamatan' => 'Blimbingsari'],
+//     ['nama_kecamatan' => 'Cluring'],
+//     ['nama_kecamatan' => 'Gambiran'],
+//     ['nama_kecamatan' => 'Genteng'],
+//     ['nama_kecamatan' => 'Giri'],
+//     ['nama_kecamatan' => 'Glagah'],
+//     ['nama_kecamatan' => 'Glenmore'],
+//     ['nama_kecamatan' => 'Kabat'],
+//     ['nama_kecamatan' => 'Kalibaru'],
+//     ['nama_kecamatan' => 'Kalipuro'],
+//     ['nama_kecamatan' => 'Licin'],
+//     ['nama_kecamatan' => 'Muncar'],
+//     ['nama_kecamatan' => 'Pesanggaran'],
+//     ['nama_kecamatan' => 'Purwoharjo'],
+//     ['nama_kecamatan' => 'Rogojampi'],
+//     ['nama_kecamatan' => 'Sempu'],
+//     ['nama_kecamatan' => 'Siliragung'],
+//     ['nama_kecamatan' => 'Singojuruh'],
+//     ['nama_kecamatan' => 'Songgon'],
+//     ['nama_kecamatan' => 'Srono'],
+//     ['nama_kecamatan' => 'Tegaldlimo'],
+//     ['nama_kecamatan' => 'Tegalsari'],
+//     ['nama_kecamatan' => 'Wongsorejo'],
+// ];
+
+// DB::table('kecamatans')->insert($kecamatans);
