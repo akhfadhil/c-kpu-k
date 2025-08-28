@@ -95,7 +95,7 @@
                   .then(data => {
                      data.forEach(desa => {
                            const option = document.createElement('option');
-                           option.value = desa.id_desa; // Assuming your desa table has id_desa
+                           option.value = desa.id; // Assuming your desa table has id_desa
                            option.textContent = desa.nama_desa; // Assuming your desa table has nama_desa
                            desaDropdown.appendChild(option);
                      });
@@ -112,11 +112,11 @@
 
          // Check if a village is selected
          if (desaId) {
-               // Redirect to the Laravel route
-               window.location.href = `/desa/${desaId}`; 
+            // Redirect to the Laravel route
+            window.location.href = `/desa/${desaId}`; 
          } else {
-               // Alert the user if no village is selected
-               alert("Silakan pilih desa terlebih dahulu");
+            // Alert the user if no village is selected
+            alert("Silakan pilih desa terlebih dahulu");
          }
       });
    </script>

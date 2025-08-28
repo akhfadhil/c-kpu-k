@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_desa')->constrained('desa')->onDelete('cascade');
+            $table->foreignId('id_desa')->constrained('desas')->onDelete('cascade');
             $table->string('kode', 50)->unique(); // kode TPS, misalnya "TPS-001"
             $table->string('lokasi_deskripsi', 255)->nullable(); // alamat/lokasi TPS
             $table->timestamps();

@@ -12,7 +12,7 @@ class LocationController extends Controller
     public function getDesaByKecamatan($id_kecamatan)
     {
         try {
-            $desa = Desa::where('id_kecamatan', $id_kecamatan)->get(['id_desa', 'nama_desa']);
+            $desa = Desa::where('id_kecamatan', $id_kecamatan)->get(['id', 'nama_desa']);
             return response()->json($desa);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to retrieve villages.'], 500);

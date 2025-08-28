@@ -11,7 +11,8 @@ class DesaController extends Controller
 {
     public function show($desaId)
     {
-        $desa = Desa::find($desaId);
+        // $desa = Desa::find($desaId);
+        $desa = Desa::with('tps')->find($desaId);
 
         if (!$desa) {
             abort(404);
@@ -22,4 +23,5 @@ class DesaController extends Controller
             'title' => $desa->nama_desa
         ]);
     }
+
 }

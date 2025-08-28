@@ -16,7 +16,7 @@ class Kecamatan extends Model
     // protected $primaryKey = 'id_kecamatan';
 
 
-    // use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 // $kecamatans = [
 //     ['nama_kecamatan' => 'Bangorejo'],

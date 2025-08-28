@@ -28,6 +28,11 @@ class Desa extends Model
     {
         return $this->belongsTo(Kecamatan::class, 'id_kecamatan', 'id');
     }
+
+    public function tps()
+    {
+        return $this->hasMany(Tps::class, 'id_desa');
+    }
 }
 
 // use Illuminate\Support\Facades\DB;
