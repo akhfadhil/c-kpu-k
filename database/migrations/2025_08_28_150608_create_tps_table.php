@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_desa')->constrained('desas')->onDelete('cascade');
             $table->string('kode', 50)->unique(); // kode TPS, misalnya "TPS-001"
             $table->string('lokasi_deskripsi', 255)->nullable(); // alamat/lokasi TPS
+            $table->integer('jumlah_pemilih')->nullable(); // jumlah pemilih di TPS
             $table->timestamps();
         });
     }
@@ -28,3 +29,9 @@ return new class extends Migration
         Schema::dropIfExists('tps');
     }
 };
+App\Models\tps::factory(2300)->recycle(
+        Desa::factory(217)->recycle(
+            Kecamatan::factory(34
+        )->create()
+    )
+)->create();

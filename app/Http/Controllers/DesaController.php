@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/DesaController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,7 +15,7 @@ class DesaController extends Controller
         if (!$desa) {
             abort(404);
         }
-
+        // dd($desa);
         return view('desa', [
             'desa' => $desa,
             'title' => $desa->nama_desa

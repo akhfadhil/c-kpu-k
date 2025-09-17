@@ -31,8 +31,8 @@
                   <select id="kecamatan" name="kecamatan" required
                         class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-500">
                      <option value="">-- Pilih Kecamatan --</option>
-                     @foreach($kecamatan as $kcmtn)
-                     <option value="{{ $kcmtn['id'] }}">{{ $kcmtn['nama_kecamatan'] }}</option>
+                     @foreach($kecamatan as $kcmt)
+                     <option value="{{ $kcmt['id'] }}">{{ $kcmt['nama_kecamatan'] }}</option>
                      @endforeach
                   </select>
                </div>
@@ -108,6 +108,7 @@
    <!-- Script untuk redirect -->
    <script>
       document.getElementById('btnCari').addEventListener('click', function() {
+         const kecamatanId = document.getElementById('kecamatan').value;
          const desaId = document.getElementById('desa').value;
 
          // Check if a village is selected
@@ -116,7 +117,8 @@
             window.location.href = `/desa/${desaId}`; 
          } else {
             // Alert the user if no village is selected
-            alert("Silakan pilih desa terlebih dahulu");
+            window.location.href = `/kecamatan/${kecamatanId}`; 
+
          }
       });
    </script>

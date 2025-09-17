@@ -12,7 +12,7 @@
             <li class="mx-2">></li>
             <li><a href="#" class="hover:text-blue-600">Banyuwangi</a></li>
             <li class="mx-2">></li>
-            <li><a href="#" class="hover:text-blue-600">Kecamatan {{ $desa->id_kecamatan }}</a></li>
+            <li><a href="#" class="hover:text-blue-600">Kecamatan {{ $desa->kecamatan->nama_kecamatan }}</a></li>
             <li class="mx-2">></li>
             <li class="text-gray-800 font-semibold">Desa {{ $desa->nama_desa }}</li>
          </ol>
@@ -28,7 +28,7 @@
                   <p class="font-semibold">{{ $tps->kode }}</p>
                   <p class="text-sm text-gray-600">{{ $tps->lokasi_deskripsi }}</p>
                </div>
-               <a href="/tps-detail.html" 
+               <a href="/tps/{{ $tps->id }}" 
                   class="bg-blue-600 hover:bg-blue-700 active:scale-95 transform transition duration-200 text-white font-semibold px-4 py-2 rounded-xl shadow">
                Lihat Dokumen
                </a>

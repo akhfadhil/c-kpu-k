@@ -10,11 +10,15 @@ class Kecamatan extends Model
     use HasFactory;
 
     protected $fillable = ['nama_kecamatan'];
+
+
+    
+    public function desa()
+    {
+        return $this->hasMany(Desa::class, 'id_kecamatan');
+    }
+
 }
-
-    // protected $table = 'kecamatan';
-    // protected $primaryKey = 'id_kecamatan';
-
 
 // use Illuminate\Support\Facades\DB;
 

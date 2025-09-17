@@ -19,6 +19,7 @@ class tps extends Model
         'id_desa',
         'kode',
         'lokasi_deskripsi',
+        'jumlah_pemilih',
     ];
 
     /**
