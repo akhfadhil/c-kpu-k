@@ -29,3 +29,8 @@ Route::get('/desa/{desaId}', [DesaController::class, 'show'])->name('desa.show')
 
 // TPS
 Route::get('/tps/{id}', [TpsController::class, 'show'])->name('tps.show');
+
+Route::get('/pdf', function () {
+    return view('pdf');
+});
+

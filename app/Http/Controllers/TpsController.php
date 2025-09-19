@@ -21,7 +21,7 @@ class TpsController extends Controller
         $tps = tps::with('desa.kecamatan')->findOrFail($idTps);
 
         // dd($tps->kode);
-        return view('show', [
+        return view('tps', [
     'title' => $tps->kode,
     'tps' => $tps,
 ]);
