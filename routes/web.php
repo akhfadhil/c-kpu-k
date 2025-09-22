@@ -8,6 +8,7 @@ use App\Http\Controllers\TpsController;
 use App\Models\Kecamatan;
 use App\Models\Desa;
 use App\Models\TPS;
+use App\Http\Controllers\PdfController;
 
 // Homepage
 Route::get("/", function () {
@@ -30,7 +31,11 @@ Route::get('/desa/{desaId}', [DesaController::class, 'show'])->name('desa.show')
 // TPS
 Route::get('/tps/{id}', [TpsController::class, 'show'])->name('tps.show');
 
-Route::get('/pdf', function () {
-    return view('pdf');
-});
+// routes/web.php
+Route::get('/view-pdf', [PdfController::class, 'show'])->name('view.pdf');
 
+Route::get("/pdf", function () {
+    return view("pdf_viewer", [
+        "title" => "Homepage"
+    ]);
+});
