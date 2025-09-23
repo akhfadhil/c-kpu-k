@@ -22,9 +22,9 @@ class TpsController extends Controller
 
         // dd($tps->kode);
         return view('tps', [
-    'title' => $tps->kode,
-    'tps' => $tps,
-]);
+            'title' => $tps->kode,
+            'tps' => $tps,
+        ]);
 
 
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\TpsController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\DokumenController;
 use App\Models\Kecamatan;
 
 // Homepage
@@ -31,3 +32,5 @@ Route::get('/tps/{id}', [TpsController::class, 'show'])->name('tps.show');
 
 // pdf
 Route::get('/viewpdf', [PdfController::class, 'show']);
+
+Route::get('/dokumen/{dokumen}/view', [DokumenController::class, 'view'])->name('dokumen.view');

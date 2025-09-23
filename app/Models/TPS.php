@@ -32,6 +32,11 @@ class tps extends Model
         return $this->belongsTo(Desa::class, 'id_desa');
 
     }
+
+    public function dokumen()
+    {
+        return $this->hasMany(Dokumen::class, 'id_tps');
+    }
 }
 
 // use App\Models\Tps;

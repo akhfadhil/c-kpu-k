@@ -34,7 +34,7 @@
                 </div>
                 <!-- Body -->
                 <div class="flex-1">
-                    <iframe src="{{ asset('pdf/Laptop.pdf') }}" class="w-full h-full rounded-b-lg"></iframe>
+                    <iframe src="{{ asset('storage\app\private\dokumen\CV_AKHMAD FANNY FADHILLA 2.pdf') }}" class="w-full h-full rounded-b-lg"></iframe>
                 </div>
             </div>
         </div>
