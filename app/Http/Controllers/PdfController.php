@@ -1,25 +1,22 @@
 <?php
 
-// app/Http/Controllers/PdfController.php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\tps;
 
 class PdfController extends Controller
 {
     public function show()
     {
-        $path = storage_path('app\public\documents\Laptop.pdf');
+        // Contoh: file ada di storage/app/public/c_hasil.pdf
+        // $filePath = storage_path('public/pdf/Laptop.pdf');
+        // $filePath = public_path('pdf/Laptop.pdf');
+        // if (!file_exists($filePath)) {
+        //     abort(404, 'File PDF tidak ditemukan');
+        // }
 
-        if (!file_exists($path)) {
-            abort(404, 'PDF file not found.');
-        }
-
-        return response()->file($path, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Laptop.pdf"'
-        ]);
+        // return response()->file($filePath);
+        return view('show');
     }
+
 }
