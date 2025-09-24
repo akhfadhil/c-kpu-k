@@ -23,29 +23,85 @@
     <div class="bg-white shadow-lg rounded-2xl p-6">
       <h2 class="text-xl font-semibold mb-4">Detail TPS {{ $tps->kode}}</h2>
 
-      <p class="mb-2"><span class="font-semibold">Alamat:</span> {{ $tps->lokasi_deskripsi }}</p>
-      <p class="mb-2"><span class="font-semibold">Jumlah Pemilih:</span> {{ $tps->jumlah_pemilih }}</p>
-      <p class="mb-4"><span class="font-semibold">Petugas KPPS:</span> {{ $tps->kpps }}</p>
+      <div class="space-y-2">
+        <div class="grid grid-cols-3 gap-2">
+          <span class="font-semibold">Alamat</span>
+          <span class="col-span-2">: {{ $tps->lokasi_deskripsi }}</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <span class="font-semibold">Jumlah Pemilih</span>
+          <span class="col-span-2">: {{ $tps->jumlah_pemilih }}</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <span class="font-semibold">Petugas KPPS</span>
+          <span class="col-span-2">: {{ $tps->kpps }}</span>
+        </div>
+      </div>
+      
+      
+      <!-- {{-- Tabel KPPS --}} -->
+        <div class="col-span-3">
+          <table class="w-full text-sm border border-gray-300 rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-1 border">No</th>
+                <th class="px-4 py-2 border">Nama</th>
+                <th class="px-4 py-2 border">Jabatan</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+                $petugas = [
+                  ['nama' => 'Budi Santoso', 'jabatan' => 'Ketua'],
+                  ['nama' => 'Siti Aminah', 'jabatan' => 'Anggota 1'],
+                  ['nama' => 'Joko Prabowo', 'jabatan' => 'Anggota 2'],
+                  ['nama' => 'Rina Wulandari', 'jabatan' => 'Anggota 3'],
+                  ['nama' => 'Andi Wijaya', 'jabatan' => 'Anggota 4'],
+                  ['nama' => 'Dewi Lestari', 'jabatan' => 'Anggota 5'],
+                  ['nama' => 'Ahmad Fauzi', 'jabatan' => 'Anggota 6'],
+                ];
+              @endphp
+              @foreach ($petugas as $i => $p)
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-2 border text-center">{{ $i+1 }}</td>
+                  <td class="px-4 py-2 border">{{ $p['nama'] }}</td>
+                  <td class="px-4 py-2 border">{{ $p['jabatan'] }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+
 
       <!-- Dokumen -->
       <div class="mt-6">
         <h3 class="text-lg font-semibold mb-2">Dokumen Hasil</h3>
 
         @if($tps->dokumen->count())
-
-          @foreach($tps->dokumen as $dok)
-            <button 
-                data-modal-target="pdfModal" 
-                data-modal-toggle="pdfModal"
-                data-pdf-url="{{ route('dokumen.view', $dok->id) }}"
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                Lihat {{ $dok->jenis_dokumen }}
-            </button>
-        @endforeach
-
+          <ul class="space-y-3">
+            @foreach($tps->dokumen as $dok)
+              <li class="flex items-center justify-between border-b pb-3">
+                <div>
+                  <p class="font-semibold">{{ $dok->jenis_dokumen_label }}</p>
+                  <p class="text-sm text-gray-600">
+                    Diupload pada {{ $dok->created_at->format('d M Y, H:i') }}
+                  </p>
+                </div>
+                <button 
+                    data-modal-target="pdfModal" 
+                    data-modal-toggle="pdfModal"
+                    data-pdf-url="{{ route('dokumen.view', $dok->id) }}"
+                    class="bg-blue-600 hover:bg-blue-700 active:scale-95 transform transition duration-200 text-white font-semibold px-4 py-2 rounded-xl shadow">
+                    Lihat Dokumen
+                </button>
+              </li>
+            @endforeach
+          </ul>
         @else
           <p class="text-gray-500">Belum ada dokumen diunggah</p>
         @endif
+
+
       </div>
     </div>
   </section>
@@ -58,7 +114,7 @@
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <!-- Header -->
         <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Lihat Dokumen</h3>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Dokumen</h3>
           <button type="button" data-modal-hide="pdfModal"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 
                    rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center 
@@ -77,7 +133,6 @@
     document.querySelectorAll("[data-modal-toggle='pdfModal']").forEach(button => {
       button.addEventListener("click", function() {
         const pdfUrl = this.getAttribute("data-pdf-url");
-        alert(pdfUrl);
         document.getElementById("pdfFrame").src = pdfUrl;
       });
     });

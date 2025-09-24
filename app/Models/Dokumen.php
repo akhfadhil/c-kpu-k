@@ -31,4 +31,18 @@ class Dokumen extends Model
         return $this->belongsTo(tps::class, 'id_tps');
 
     }
+
+    public function getJenisDokumenLabelAttribute()
+    {
+        $map = [
+            'PPWP'  => 'Presiden & Wakil Presiden',
+            'DPRRI' => 'DPR RI',
+            'DPD'   => 'DPD',
+            'DPRDP' => 'DPRD Provinsi',
+            'DPRDK' => 'DPRD Kabupaten',
+        ];
+
+        // $this->jenis_dokumen harus sesuai nama kolom di DB
+        return $map[$this->jenis_dokumen] ?? ucfirst($this->jenis_dokumen ?? '');
+    }
 }
